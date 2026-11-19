@@ -204,6 +204,32 @@
     </fieldset>
 
     <fieldset>
+      <label class="q" for="wish">아이에게서 듣고 싶은 말</label>
+      <p class="hint">영상 끝에 아이가 보내는 답장이 도착해요. 아이가 해 줄 것 같은 말, 꼭 듣고 싶은 말을 적어 주세요. 그 마음을 담아 아이의 목소리로 편지를 써 드려요.</p>
+      <textarea id="wish" maxlength="600" style="min-height:90px" placeholder="예) 하나도 안 아프다고, 원망하지 않는다고, 천천히 오라고 말해 줬으면 좋겠어요."></textarea>
+    </fieldset>
+
+    <fieldset>
+      <label class="q" for="caller">아이가 나를 부르던 이름</label>
+      <p class="hint">답장 첫 줄에 들어가요.</p>
+      <input type="text" id="caller" maxlength="12" placeholder="예) 엄마, 아빠, 언니, 형아">
+    </fieldset>
+
+    <fieldset>
+      <label class="q" for="passedDate">무지개다리를 건넌 날</label>
+      <p class="hint">편지 소인에 날짜로 찍혀요. 모르시면 비워 두셔도 괜찮아요.</p>
+      <input type="date" id="passedDate">
+    </fieldset>
+
+    <fieldset>
+      <span class="q">아이가 잘 보이는 전신 사진 1장</span>
+      <p class="hint">영상 마지막, 아이가 무지개다리 위를 뛰어오는 장면에 쓰여요. 몸 전체가 나오고 얼굴이 정면에 가까운 밝은 사진이 가장 좋아요.</p>
+      <label class="drop"><b>전신 사진 고르기</b><span>없으면 아래 사진 중에서 골라 드릴게요</span>
+        <input type="file" id="heroInput" accept="image/*"></label>
+      <div class="thumbs" id="heroThumbs"></div>
+    </fieldset>
+
+    <fieldset>
       <span class="q">사진<span class="req">*</span></span>
       <p class="hint">5장에서 15장을 추천해요. 얼굴이 잘 보이는 사진, 함께 있는 사진, 좋아하던 물건 사진이 좋아요.</p>
       <label class="drop"><b>사진 고르기</b><span>휴대폰 앨범에서 여러 장 선택할 수 있어요</span>
@@ -290,14 +316,14 @@ const vid = $('sampleVideo'), sb = $('soundBtn');
 sb.onclick = () => { vid.muted = !vid.muted; if (!vid.muted) { vid.currentTime = 0; vid.play(); } sb.textContent = vid.muted ? '소리 켜기' : '소리 끄기'; };
 
 const MAX_PHOTOS = 15, MAX_VIDEOS = 2, MAX_VIDEO_MB = 50;
-const photos = [], videos = [];
+const photos = [], videos = [], hero = [];
 
 function renderThumbs(list, el, kind){
   el.innerHTML = '';
   list.forEach((f, i) => {
     const d = document.createElement('div'); d.className = 'thumb';
     const url = URL.createObjectURL(f);
-    const m = kind === 'photo' ? Object.assign(document.createElement('img'), {src:url, alt:''})
+    const m = kind !== 'video' ?Object.assign(document.createElement('img'), {src:url, alt:''})
                                : Object.assign(document.createElement('video'), {src:url, muted:true, playsInline:true});
     d.appendChild(m);
     if (kind === 'video') { const t = document.createElement('span'); t.className='tag'; t.textContent = (f.size/1048576).toFixed(0)+'MB'; d.appendChild(t); }
@@ -310,6 +336,10 @@ function renderThumbs(list, el, kind){
 $('photoInput').addEventListener('change', e => {
   for (const f of e.target.files) { if (photos.length >= MAX_PHOTOS) break; photos.push(f); }
   e.target.value = ''; renderThumbs(photos, $('photoThumbs'), 'photo');
+});
+$('heroInput').addEventListener('change', e => {
+  hero.length = 0; if (e.target.files[0]) hero.push(e.target.files[0]);
+  e.target.value = ''; renderThumbs(hero, $('heroThumbs'), 'hero');
 });
 $('videoInput').addEventListener('change', e => {
   for (const f of e.target.files) {
@@ -348,7 +378,7 @@ $('form').addEventListener('submit', async e => {
 
   const btn = $('submitBtn'); btn.disabled = true; btn.textContent = '보내는 중…';
   $('progress').style.display='block';
-  const total = photos.length + videos.length; let doneN = 0;
+  const total = photos.length + videos.length + hero.length; let doneN = 0;
   const tick = () => { doneN++; $('barFill').style.width = Math.round(doneN/(total+1)*100)+'%'; $('progressText').textContent = `사진과 영상을 보내는 중이에요 (${doneN}/${total})`; };
 
   try{
@@ -362,6 +392,13 @@ $('form').addEventListener('submit', async e => {
         const { error } = await sbc.storage.from(BUCKET).upload(path, blob, {contentType: blob.type || 'image/jpeg', upsert:false});
         if (error) throw error; files.push(path); tick();
       }
+      let heroPath = null;
+      if (hero.length){
+        const {blob, ext} = await shrink(hero[0]);
+        heroPath = `${id}/hero.${ext}`;
+        const { error } = await sbc.storage.from(BUCKET).upload(heroPath, blob, {contentType: blob.type || 'image/jpeg', upsert:false});
+        if (error) throw error; files.push(heroPath); tick();
+      }
       for (let i=0;i<videos.length;i++){
         const v = videos[i]; const ext = (v.name.split('.').pop()||'mp4').toLowerCase();
         const path = `${id}/video-${i+1}.${ext}`;
@@ -371,6 +408,8 @@ $('form').addEventListener('submit', async e => {
       const { error } = await sbc.from('applications').insert({
         id, pet_name: pet, breed, birth_year: yr($('birthYear').value), death_year: yr($('deathYear').value),
         memory, one_line: $('oneLine').value.trim() || null, message: $('message').value.trim() || null,
+        wish_words: $('wish').value.trim() || null, caller_name: $('caller').value.trim() || null,
+        passed_date: $('passedDate').value || null, hero_file: heroPath,
         instagram: insta, email: $('email').value.trim() || null, files,
         photo_count: photos.length, video_count: videos.length,
         consent_privacy: true, consent_publish: true, user_agent: navigator.userAgent.slice(0,200)
