@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>무지개편지 · 우리 아이 추모 영상 신청</title>
+<meta name="description" content="떠난 아이의 사진으로 노래가 담긴 추모 영상을 무료로 만들어 드려요.">
+<meta property="og:title" content="무지개편지 · 우리 아이 추모 영상 신청">
+<meta property="og:description" content="아이 이름으로 노래를 만들어, 사진과 함께 영상으로 보내 드려요. 무료입니다.">
+<meta name="theme-color" content="#F4EFE6">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap">
+<style>
+  :root{
+    --paper:#F4EFE6; --paper-2:#EDE6DA; --ink:#2B2B2B; --ink-2:#5C5852; --ink-3:#8A857D;
+    --peach:#E8B79A; --peach-d:#C98F6E; --sky:#A9C2D6; --line:#D9D1C3; --white:#FFFDF9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:'SUIT',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
+    background:var(--paper); color:var(--ink); line-height:1.7; word-break:keep-all; overflow-wrap:break-word;
+    background-image:radial-gradient(rgba(43,43,43,.035) 1px,transparent 1px); background-size:3px 3px;
+  }
+  .wrap{max-width:480px;margin:0 auto;padding:0 24px 64px}
+  .rainbow{height:3px;background:linear-gradient(90deg,#f4c7c3,#f7dcb5,#f6efb8,#cfe7c4,#bfd9e8,#c9c6ea,#e2c8e6);opacity:.85}
+  header{padding:28px 0 8px;display:flex;align-items:center;justify-content:space-between}
+  .brand{font-weight:700;font-size:15px;letter-spacing:.02em}
+  .stamp{width:58px;height:58px;border:1.5px dashed var(--sky);border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:10px;font-weight:700;color:#7E9DB6;transform:rotate(-12deg);text-align:center;line-height:1.25}
+  .hero{padding:28px 0 8px}
+  .eyebrow{font-size:13px;color:var(--ink-3);font-weight:600;margin-bottom:12px}
+  h1{font-size:28px;line-height:1.38;font-weight:700;letter-spacing:-.02em}
+  h1 .hand{font-family:'Nanum Pen Script',cursive;font-weight:400;font-size:40px;color:var(--peach-d);line-height:1}
+  .lead{margin-top:16px;font-size:16px;color:var(--ink-2)}
+  .free{display:inline-block;margin-top:18px;padding:6px 14px;border-radius:999px;background:var(--peach);color:var(--ink);font-size:14px;font-weight:700}
+  .letter{margin:32px 0;padding:24px 22px;background:var(--white);border:1px solid var(--line);border-radius:4px;
+    box-shadow:0 1px 0 var(--line),0 10px 24px -18px rgba(43,43,43,.35);position:relative}
+  .letter::before{content:"";position:absolute;inset:8px;border:1px solid var(--paper-2);pointer-events:none}
+  .letter p{font-size:15px;color:var(--ink-2)}
+  .letter p+p{margin-top:10px}
+  .letter .sign{margin-top:14px;text-align:right;font-family:'Nanum Pen Script',cursive;font-size:22px;color:var(--ink)}
+  h2{font-size:19px;font-weight:700;margin:40px 0 16px}
+  .steps{list-style:none;display:grid;gap:12px}
+  .steps li{display:flex;gap:14px;align-items:flex-start}
+  .num{flex:none;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#FFFFFF;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .steps b{display:block;font-size:15px}
+  .steps span{font-size:14px;color:var(--ink-3)}
+  form{margin-top:8px}
+  fieldset{border:0;margin:0 0 26px}
+  label.q,legend.q{display:block;font-size:15px;font-weight:700;margin-bottom:8px}
+  .req{color:var(--peach-d);font-weight:700;margin-left:2px}
+  .hint{font-size:13px;color:var(--ink-3);margin:-4px 0 10px}
+  input[type=text],input[type=email],textarea{
+    width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--white);border:1px solid var(--line);border-radius:10px;padding:13px 14px;outline:none;transition:border-color .15s}
+  textarea{min-height:120px;resize:vertical;line-height:1.6}
+  input:focus,textarea:focus{border-color:var(--peach-d)}
+  ::placeholder{color:#B4AEA4}
+  .drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1.5px dashed var(--line);background:var(--white);border-radius:12px;padding:22px 14px;text-align:center;cursor:pointer}
+  .drop:active{background:var(--paper-2)}
+  .drop b{font-size:15px}
+  .drop span{font-size:13px;color:var(--ink-3)}
+  .drop input{display:none}
+  .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+  .thumbs:empty{display:none}
+  .thumb{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;background:var(--paper-2)}
+  .thumb img,.thumb video{width:100%;height:100%;object-fit:cover;display:block}
+  .thumb button{position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;border:0;background:rgba(43,43,43,.7);color:#FFFFFF;font-size:13px;line-height:22px;cursor:pointer}
+  .thumb .tag{position:absolute;left:4px;bottom:3px;font-size:10px;color:#FFFFFF;background:rgba(43,43,43,.6);padding:1px 5px;border-radius:4px}
+  .count{font-size:13px;color:var(--ink-3);margin-top:6px}
+  .check{display:flex;gap:10px;align-items:flex-start;padding:14px;background:var(--white);border:1px solid var(--line);border-radius:10px}
+  .check+.check{margin-top:8px}
+  .check input{flex:none;width:20px;height:20px;margin-top:3px;accent-color:var(--ink)}
+  .check b{font-size:14px;display:block}
+  .check span{font-size:13px;color:var(--ink-3);display:block;line-height:1.55;margin-top:2px}
+  .submit{width:100%;margin-top:6px;padding:17px;border:0;border-radius:12px;background:var(--ink);color:#FFFFFF;font:inherit;font-size:17px;font-weight:700;cursor:pointer}
+  .submit:disabled{opacity:.5;cursor:default}
+  .err{display:none;margin-top:12px;padding:12px 14px;border-radius:10px;background:#F6E1DA;color:#8C3B22;font-size:14px}
+  .progress{display:none;margin-top:14px}
+  .bar{height:6px;background:var(--paper-2);border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--peach-d);transition:width .25s}
+  .progress p{font-size:13px;color:var(--ink-3);margin-top:6px;text-align:center}
+  .done{display:none;text-align:center;padding:56px 0 24px}
+  .done .stamp{margin:0 auto 22px;width:76px;height:76px;font-size:12px}
+  .done h2{margin:0 0 12px;font-size:22px}
+  .done p{color:var(--ink-2);font-size:15px}
+  .faq details{border-bottom:1px solid var(--line);padding:14px 0}
+  .faq summary{font-size:15px;font-weight:600;cursor:pointer;list-style:none}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";float:right;color:var(--ink-3)}
+  .faq details[open] summary::after{content:"–"}
+  .faq p{font-size:14px;color:var(--ink-2);margin-top:8px}
+  footer{margin-top:44px;font-size:12px;color:var(--ink-3);text-align:center;line-height:1.8}
+  footer a{color:var(--ink-2)}
+  .test-banner{display:none;background:var(--sky);color:var(--ink);font-size:13px;text-align:center;padding:8px}
+</style>
+</head>
+<body>
+<div class="test-banner" id="testBanner">테스트 화면입니다. 아직 신청이 저장되지 않아요.</div>
+<div class="rainbow"></div>
+<div class="wrap">
+  <header>
+    <div class="brand">무지개편지</div>
+    <div class="stamp">RAINBOW<br>LETTER<br>2026</div>
+  </header>
+
+  <section class="hero" id="intro">
+    <p class="eyebrow">떠난 아이를 그리워하는 분들께</p>
+    <h1>우리 <span class="hand">아이 이름</span>으로<br>노래를 만들어 드려요</h1>
+    <p class="lead">사진과 영상, 아이와의 기억을 보내 주시면 아이만을 위한 노래를 짓고, 사진과 함께 30초에서 1분 길이의 추모 영상으로 만들어 보내 드립니다.</p>
+    <span class="free">무료로 만들어 드려요</span>
+  </section>
+
+  <div class="letter">
+    <p>아직 치우지 못한 방석, 현관에 걸린 산책줄. 아이가 떠난 자리는 생각보다 오래 남습니다.</p>
+    <p>그 시간을 노래로 남겨 드리고 싶어 무지개편지를 시작했습니다. 보내 주신 이야기는 한 줄 한 줄 정성껏 읽고, 보호자님이 쓰신 말을 가사에 그대로 담습니다.</p>
+    <p class="sign">무지개편지 드림</p>
+  </div>
+
+  <h2>이렇게 만들어져요</h2>
+  <ol class="steps">
+    <li><div class="num">1</div><div><b>사진과 이야기 보내기</b><span>이 페이지에서 3분이면 끝나요</span></div></li>
+    <li><div class="num">2</div><div><b>아이만을 위한 노래와 영상 제작</b><span>보내 주신 기억으로 가사를 쓰고 사진을 엮어요</span></div></li>
+    <li><div class="num">3</div><div><b>인스타그램 DM으로 전달</b><span>접수 순서대로 완성되는 대로 보내 드려요</span></div></li>
+  </ol>
+
+  <h2 id="apply">신청하기</h2>
+  <form id="form" novalidate>
+    <fieldset>
+      <label class="q" for="petName">아이 이름<span class="req">*</span></label>
+      <input type="text" id="petName" name="pet_name" maxlength="30" placeholder="예) 콩이" required>
+    </fieldset>
+
+    <fieldset>
+      <label class="q" for="together">함께한 시간</label>
+      <input type="text" id="together" name="together" maxlength="60" placeholder="예) 2011년 봄부터 2026년 가을까지, 15년">
+    </fieldset>
+
+    <fieldset>
+      <label class="q" for="memory">아이를 떠올리면 생각나는 장면<span class="req">*</span></label>
+      <p class="hint">거창하지 않아도 괜찮아요. 매일 하던 작은 습관이 가장 좋은 가사가 됩니다.</p>
+      <textarea id="memory" name="memory" maxlength="1500" placeholder="예) 퇴근하고 현관문을 열면 꼬리부터 흔들며 달려왔어요. 산책 가자는 말에 귀가 먼저 반응했고, 겨울엔 꼭 제 발 위에서 잠들었어요." required></textarea>
+    </fieldset>
+
+    <fieldset>
+      <label class="q" for="message">아이에게 하고 싶은 말</label>
+      <textarea id="message" name="message" maxlength="600" style="min-height:90px" placeholder="예) 고마웠어. 다시 만나면 제일 먼저 달려와 줘."></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend class="q">사진<span class="req">*</span></legend>
+      <p class="hint">5장에서 15장을 추천해요. 아이 얼굴이 잘 보이는 사진, 함께 있는 사진, 좋아하던 물건 사진이 좋아요.</p>
+      <label class="drop"><b>사진 고르기</b><span>휴대폰 앨범에서 여러 장 선택할 수 있어요</span>
+        <input type="file" id="photoInput" accept="image/*" multiple></label>
+      <div class="thumbs" id="photoThumbs"></div>
+      <p class="count" id="photoCount">0 / 15장</p>
+    </fieldset>
+
+    <fieldset>
+      <legend class="q">영상</legend>
+      <p class="hint">있으면 더 생생해져요. 최대 2개, 각 1분 이내를 권해요.</p>
+      <label class="drop"><b>영상 고르기</b><span>선택 사항이에요</span>
+        <input type="file" id="videoInput" accept="video/*" multiple></label>
+      <div class="thumbs" id="videoThumbs"></div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q" for="insta">완성본을 받을 인스타그램 아이디<span class="req">*</span></label>
+      <input type="text" id="insta" name="instagram" maxlength="40" placeholder="예) @kong_mom" autocomplete="off" autocapitalize="off" required>
+    </fieldset>
+
+    <fieldset>
+      <label class="q" for="email">이메일</label>
+      <p class="hint">DM이 닿지 않을 때만 연락드려요.</p>
+      <input type="email" id="email" name="email" maxlength="80" placeholder="선택 사항" autocomplete="email">
+    </fieldset>
+
+    <fieldset>
+      <label class="check"><input type="checkbox" id="agreePrivacy">
+        <div><b>개인정보 수집·이용 동의 (필수)</b>
+        <span>추모 영상 제작과 전달을 위해 아이 이름, 사진·영상, 사연, 인스타그램 아이디, 이메일을 받습니다. 전달을 마친 날로부터 3개월 뒤 모두 삭제합니다.</span></div></label>
+      <label class="check"><input type="checkbox" id="agreePublish">
+        <div><b>무지개편지 계정 게시 동의 (선택)</b>
+        <span>완성된 영상을 무지개편지 인스타그램에 올려도 괜찮다면 체크해 주세요. 체크하지 않으시면 보호자님께만 보내 드립니다.</span></div></label>
+    </fieldset>
+
+    <button type="submit" class="submit" id="submitBtn">신청 보내기</button>
+    <div class="err" id="err"></div>
+    <div class="progress" id="progress"><div class="bar"><i id="barFill"></i></div><p id="progressText">사진을 보내는 중이에요</p></div>
+  </form>
+
+  <section class="done" id="done">
+    <div class="stamp">RECEIVED<br>WITH<br>LOVE</div>
+    <h2>소중한 이야기, 잘 받았어요</h2>
+    <p><b id="donePet"></b>의 노래를 정성껏 만들고 있을게요.<br>완성되면 인스타그램 DM으로 보내 드립니다.<br>DM 요청함도 한 번씩 확인해 주세요.</p>
+  </section>
+
+  <h2>자주 묻는 질문</h2>
+  <div class="faq">
+    <details><summary>정말 무료인가요?</summary><p>네. 지금은 신청해 주시는 모든 분께 무료로 만들어 드리고 있어요. 신청이 많을 때는 접수 순서대로 차례차례 만들어 드립니다.</p></details>
+    <details><summary>노래는 어떻게 만드나요?</summary><p>보내 주신 기억으로 가사를 쓰고, AI 음악 도구로 노래를 만듭니다. 무지개편지의 모든 음악은 AI를 활용해 만들고 있어요.</p></details>
+    <details><summary>강아지가 아니어도 되나요?</summary><p>물론이에요. 고양이, 새, 토끼, 함께한 어떤 아이든 괜찮아요.</p></details>
+    <details><summary>보낸 사진이 공개되나요?</summary><p>게시 동의에 체크하신 경우에만 무지개편지 계정에 올립니다. 체크하지 않으시면 보호자님께만 보내 드리고, 어디에도 공개하지 않아요.</p></details>
+  </div>
+
+  <footer>
+    무지개편지 · 떠난 아이를 그리워하는 분들을 위한 노래<br>
+    인스타그램 <a href="https://instagram.com/mydarping" id="igLink">@mydarping</a><br>
+    AI를 활용해 만든 음악입니다
+  </footer>
+</div>
+
+<script type="module">
+// ===== 설정: Supabase 연결 정보 (공개용 키만 넣습니다) =====
+const SUPABASE_URL = "https://pwlkkzbbcqbcxjqvfxlo.supabase.co";
+const SUPABASE_KEY = "sb_publishable_NKpIqCGxVIflHvD986KTgg_x--K3tWY";
+const BUCKET = "submissions";
+// ==========================================================
+const LIVE = Boolean(SUPABASE_URL && SUPABASE_KEY);
+if (!LIVE) document.getElementById('testBanner').style.display = 'block';
+
+const MAX_PHOTOS = 15, MAX_VIDEOS = 2, MAX_VIDEO_MB = 50;
+const photos = [], videos = [];
+const $ = id => document.getElementById(id);
+
+function renderThumbs(list, el, kind){
+  el.innerHTML = '';
+  list.forEach((f, i) => {
+    const d = document.createElement('div'); d.className = 'thumb';
+    const url = URL.createObjectURL(f);
+    const m = kind === 'photo' ? Object.assign(document.createElement('img'), {src:url, alt:''})
+                               : Object.assign(document.createElement('video'), {src:url, muted:true, playsInline:true});
+    d.appendChild(m);
+    if (kind === 'video') { const t = document.createElement('span'); t.className='tag'; t.textContent = (f.size/1048576).toFixed(0)+'MB'; d.appendChild(t); }
+    const b = document.createElement('button'); b.type='button'; b.textContent='×'; b.setAttribute('aria-label','삭제');
+    b.onclick = () => { list.splice(i,1); renderThumbs(list, el, kind); };
+    d.appendChild(b); el.appendChild(d);
+  });
+  if (kind === 'photo') $('photoCount').textContent = `${list.length} / ${MAX_PHOTOS}장`;
+}
+
+$('photoInput').addEventListener('change', e => {
+  for (const f of e.target.files) { if (photos.length >= MAX_PHOTOS) break; photos.push(f); }
+  e.target.value = ''; renderThumbs(photos, $('photoThumbs'), 'photo');
+});
+$('videoInput').addEventListener('change', e => {
+  for (const f of e.target.files) {
+    if (videos.length >= MAX_VIDEOS) break;
+    if (f.size > MAX_VIDEO_MB*1048576) { showErr(`영상은 ${MAX_VIDEO_MB}MB 이하로 올려 주세요. 길이가 1분 이내면 대부분 괜찮아요.`); continue; }
+    videos.push(f);
+  }
+  e.target.value = ''; renderThumbs(videos, $('videoThumbs'), 'video');
+});
+
+function showErr(msg){ const e=$('err'); e.textContent=msg; e.style.display='block'; e.scrollIntoView({behavior:'smooth',block:'center'}); }
+
+// 사진은 긴 변 2400px JPEG로 줄여서 빠르게 보냄. 실패하면 원본 그대로.
+async function shrink(file){
+  try{
+    const bmp = await createImageBitmap(file, {imageOrientation:'from-image'});
+    const s = Math.min(1, 2400/Math.max(bmp.width,bmp.height));
+    if (s === 1 && file.size < 3*1048576 && file.type === 'image/jpeg') return {blob:file, ext:'jpg'};
+    const c = document.createElement('canvas'); c.width=Math.round(bmp.width*s); c.height=Math.round(bmp.height*s);
+    c.getContext('2d').drawImage(bmp,0,0,c.width,c.height);
+    const blob = await new Promise(r => c.toBlob(r,'image/jpeg',0.9));
+    return blob ? {blob, ext:'jpg'} : {blob:file, ext:(file.name.split('.').pop()||'jpg').toLowerCase()};
+  }catch{ return {blob:file, ext:(file.name.split('.').pop()||'jpg').toLowerCase()}; }
+}
+
+$('form').addEventListener('submit', async e => {
+  e.preventDefault(); $('err').style.display='none';
+  const pet = $('petName').value.trim(), memory = $('memory').value.trim();
+  const insta = $('insta').value.trim().replace(/^@+/,'');
+  if (!pet) return showErr('아이 이름을 적어 주세요.');
+  if (!memory) return showErr('아이를 떠올리면 생각나는 장면을 한두 줄이라도 적어 주세요.');
+  if (photos.length < 1) return showErr('사진을 1장 이상 골라 주세요.');
+  if (!/^[A-Za-z0-9._]{1,30}$/.test(insta)) return showErr('인스타그램 아이디를 확인해 주세요. 영문, 숫자, 마침표, 밑줄만 쓸 수 있어요.');
+  if (!$('agreePrivacy').checked) return showErr('개인정보 수집·이용에 동의해 주셔야 만들어 드릴 수 있어요.');
+
+  const btn = $('submitBtn'); btn.disabled = true; btn.textContent = '보내는 중…';
+  $('progress').style.display='block';
+  const total = photos.length + videos.length; let doneN = 0;
+  const tick = (t) => { doneN++; $('barFill').style.width = Math.round(doneN/(total+1)*100)+'%'; $('progressText').textContent = t || `사진과 영상을 보내는 중이에요 (${doneN}/${total})`; };
+
+  try{
+    const id = crypto.randomUUID();
+    const files = [];
+    if (LIVE){
+      const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+      const sb = createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{persistSession:false}});
+      for (let i=0;i<photos.length;i++){
+        const {blob, ext} = await shrink(photos[i]);
+        const path = `${id}/photo-${String(i+1).padStart(2,'0')}.${ext}`;
+        const { error } = await sb.storage.from(BUCKET).upload(path, blob, {contentType: blob.type || 'image/jpeg', upsert:false});
+        if (error) throw error; files.push(path); tick();
+      }
+      for (let i=0;i<videos.length;i++){
+        const v = videos[i]; const ext = (v.name.split('.').pop()||'mp4').toLowerCase();
+        const path = `${id}/video-${i+1}.${ext}`;
+        const { error } = await sb.storage.from(BUCKET).upload(path, v, {contentType: v.type || 'video/mp4', upsert:false});
+        if (error) throw error; files.push(path); tick();
+      }
+      const { error } = await sb.from('applications').insert({
+        id, pet_name: pet, together: $('together').value.trim() || null, memory,
+        message: $('message').value.trim() || null, instagram: insta,
+        email: $('email').value.trim() || null, files,
+        photo_count: photos.length, video_count: videos.length,
+        consent_privacy: true, consent_publish: $('agreePublish').checked,
+        user_agent: navigator.userAgent.slice(0,200)
+      });
+      if (error) throw error;
+    } else {
+      for (let i=0;i<total;i++){ await new Promise(r=>setTimeout(r,120)); tick(); }
+    }
+    $('barFill').style.width='100%';
+    $('donePet').textContent = pet;
+    $('form').style.display='none'; $('apply').style.display='none';
+    $('done').style.display='block'; $('done').scrollIntoView({behavior:'smooth'});
+  }catch(err){
+    console.error(err);
+    btn.disabled=false; btn.textContent='다시 보내기'; $('progress').style.display='none';
+    showErr('보내는 중에 문제가 생겼어요. 인터넷 연결을 확인하고 한 번 더 눌러 주세요. 계속 안 되면 인스타그램 DM으로 알려 주세요.');
+  }
+});
+</script>
+</body>
+</html>
