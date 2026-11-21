@@ -115,6 +115,13 @@
   footer{margin-top:48px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center}
   footer a{color:var(--ink-2);font-size:13px}
   .test-banner{display:none;background:var(--slate);color:#FFFFFF;font-size:13px;text-align:center;padding:8px}
+.easy{background:#FBF9F5;border:1px solid #E4DED3;border-left:3px solid #8C4A35;padding:14px 16px;font-size:15px;line-height:1.7;margin:0 0 22px;word-break:keep-all}
+details.more{margin:6px 0 22px;border-top:1px solid #E4DED3;border-bottom:1px solid #E4DED3}
+details.more>summary{cursor:pointer;padding:16px 2px;font-weight:600;list-style:none}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::after{content:"＋";float:right;color:#8C4A35}
+details.more[open]>summary::after{content:"－"}
+details.more>summary span{color:#8B857D;font-weight:400}
 </style>
 </head>
 <body>
@@ -159,22 +166,35 @@
 
   <h2>이렇게 만들어져요</h2>
   <ol class="steps">
-    <li><div class="n">01</div><div><b>사진과 이야기 보내기</b><span>이 페이지에서 3분이면 끝나요</span></div></li>
-    <li><div class="n">02</div><div><b>무지개편지의 노래에 담아 영상 제작</b><span>사진을 엮고, 보내 주신 문장을 자막으로 넣어요</span></div></li>
+    <li><div class="n">01</div><div><b>사진과 이야기 보내기</b><span>이름과 사진만 있어도 충분해요</span></div></li>
+    <li><div class="n">02</div><div><b>편지와 답장, 달려오는 장면까지</b><span>보내 주신 사진으로 아이가 무지개다리에서 달려오는 장면을 만들어 넣어요</span></div></li>
     <li><div class="n">03</div><div><b>DM으로 전달, 계정에 함께 게시</b><span>완성되면 보내 드리고, 무지개편지에도 함께 실어요</span></div></li>
   </ol>
 
   <h2 id="apply">신청하기</h2>
   <form id="form" novalidate>
+    <div class="easy">적기 힘드시면 <b>이름과 사진만</b> 보내 주셔도 괜찮아요. 나머지는 저희가 조심스럽게 채워 드릴게요.<br>인스타그램 DM(@mujigae.letter)으로 사진만 보내 주셔도 돼요.</div>
+
     <fieldset>
       <label class="q" for="petName">아이 이름<span class="req">*</span></label>
       <input type="text" id="petName" maxlength="30" placeholder="예) 콩이" required>
     </fieldset>
 
     <fieldset>
-      <label class="q" for="breed">아이의 종류<span class="req">*</span></label>
+      <span class="q">사진<span class="req">*</span></span>
+      <p class="hint">3장 이상이면 충분해요. 얼굴이 잘 보이는 사진, 몸 전체가 나온 사진, 함께 있는 사진이 있으면 더 좋아요.</p>
+      <label class="drop"><b>사진 고르기</b><span>휴대폰 앨범에서 여러 장 선택할 수 있어요</span>
+        <input type="file" id="photoInput" accept="image/*" multiple></label>
+      <div class="thumbs" id="photoThumbs"></div>
+      <p class="count" id="photoCount">0 / 15장</p>
+    </fieldset>
+
+    <details class="more">
+      <summary>조금 더 적어 주시면 영상이 깊어져요 <span>(선택)</span></summary>
+    <fieldset>
+      <label class="q" for="breed">아이의 종류</label>
       <p class="hint">믹스라면 "믹스"라고만 적어 주세요. "세상에 하나뿐인 믹스"로 적어 드릴게요.</p>
-      <input type="text" id="breed" maxlength="30" placeholder="예) 말티즈, 골든 리트리버, 코리안 숏헤어, 믹스" required>
+      <input type="text" id="breed" maxlength="30" placeholder="예) 말티즈, 골든 리트리버, 코리안 숏헤어, 믹스">
     </fieldset>
 
     <fieldset>
@@ -187,9 +207,9 @@
     </fieldset>
 
     <fieldset>
-      <label class="q" for="memory">아이를 떠올리면 생각나는 장면<span class="req">*</span></label>
+      <label class="q" for="memory">아이를 떠올리면 생각나는 장면</label>
       <p class="hint">거창하지 않아도 괜찮아요. 매일 하던 작은 습관이 가장 오래 남습니다.</p>
-      <textarea id="memory" maxlength="1500" placeholder="예) 퇴근하고 현관문을 열면 꼬리부터 흔들며 달려왔어요. 겨울엔 꼭 제 발 위에서 잠들었어요." required></textarea>
+      <textarea id="memory" maxlength="1500" placeholder="예) 퇴근하고 현관문을 열면 꼬리부터 흔들며 달려왔어요. 겨울엔 꼭 제 발 위에서 잠들었어요."></textarea>
     </fieldset>
 
     <fieldset>
@@ -230,21 +250,14 @@
     </fieldset>
 
     <fieldset>
-      <span class="q">사진<span class="req">*</span></span>
-      <p class="hint">5장에서 15장을 추천해요. 얼굴이 잘 보이는 사진, 함께 있는 사진, 좋아하던 물건 사진이 좋아요.</p>
-      <label class="drop"><b>사진 고르기</b><span>휴대폰 앨범에서 여러 장 선택할 수 있어요</span>
-        <input type="file" id="photoInput" accept="image/*" multiple></label>
-      <div class="thumbs" id="photoThumbs"></div>
-      <p class="count" id="photoCount">0 / 15장</p>
-    </fieldset>
-
-    <fieldset>
       <span class="q">영상</span>
       <p class="hint">있으면 더 생생해져요. 최대 2개, 각 1분 이내를 권해요.</p>
       <label class="drop"><b>영상 고르기</b><span>선택 사항이에요</span>
         <input type="file" id="videoInput" accept="video/*" multiple></label>
       <div class="thumbs" id="videoThumbs"></div>
     </fieldset>
+
+    </details>
 
     <fieldset>
       <label class="q" for="insta">완성본을 받을 인스타그램 아이디<span class="req">*</span></label>
@@ -369,8 +382,6 @@ $('form').addEventListener('submit', async e => {
   const pet = $('petName').value.trim(), breed = $('breed').value.trim(), memory = $('memory').value.trim();
   const insta = $('insta').value.trim().replace(/^@+/,'');
   if (!pet) return showErr('아이 이름을 적어 주세요.');
-  if (!breed) return showErr('아이의 종류를 적어 주세요. 믹스라면 "믹스"라고만 적어 주셔도 돼요.');
-  if (!memory) return showErr('아이를 떠올리면 생각나는 장면을 한두 줄이라도 적어 주세요.');
   if (photos.length < 1) return showErr('사진을 1장 이상 골라 주세요.');
   if (!/^[A-Za-z0-9._]{1,30}$/.test(insta)) return showErr('인스타그램 아이디를 확인해 주세요. 영문, 숫자, 마침표, 밑줄만 쓸 수 있어요.');
   if (!$('agreePublish').checked) return showErr('무지개편지의 영상은 계정에 함께 실려 같은 아픔을 지나는 분들과 나눠요. 게시에 동의해 주셔야 만들어 드릴 수 있어요.');
@@ -406,8 +417,8 @@ $('form').addEventListener('submit', async e => {
         if (error) throw error; files.push(path); tick();
       }
       const { error } = await sbc.from('applications').insert({
-        id, pet_name: pet, breed, birth_year: yr($('birthYear').value), death_year: yr($('deathYear').value),
-        memory, one_line: $('oneLine').value.trim() || null, message: $('message').value.trim() || null,
+        id, pet_name: pet, breed: breed || null, birth_year: yr($('birthYear').value), death_year: yr($('deathYear').value),
+        memory: memory || null, one_line: $('oneLine').value.trim() || null, message: $('message').value.trim() || null,
         wish_words: $('wish').value.trim() || null, caller_name: $('caller').value.trim() || null,
         passed_date: $('passedDate').value || null, hero_file: heroPath,
         instagram: insta, email: $('email').value.trim() || null, files,
